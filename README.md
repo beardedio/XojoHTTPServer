@@ -1,11 +1,13 @@
 realbasic-httpserver
 ====================
 
+This code is released under the MIT License.
+
 A http server class for RealBasic
 
 
 
-If any one needs help using these classes you can reach me at brandon *AT* kiltish.com
+If any one needs help using these classes you can reach me at bskrtich *AT* kiltish.com
 http://www.kiltish.com
 
 
