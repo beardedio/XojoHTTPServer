@@ -1,0 +1,236 @@
+<?xml version="1.0"?>
+<RBProject version="2012r2.1" FormatVersion="2" MinIDEVersion="20070100">
+<block type="Module" ID="490416607">
+ <ObjName>MyHTTPServerLogModule</ObjName>
+ <ObjContainerID>0</ObjContainerID>
+ <IsClass>0</IsClass>
+ <ItemFlags>1</ItemFlags>
+ <IsInterface>0</IsInterface>
+ <Compatibility></Compatibility>
+ <Method>
+  <ItemName>LogMsg</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Sub LogMsg(Type As Integer, s As String)</SourceLine>
+   <SourceLine>Dim d As New Date</SourceLine>
+   <SourceLine>Dim i As Integer</SourceLine>
+   <SourceLine>Dim DebugLogPrefix As String</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>DebugLogPrefix = "HTTP Server "</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>#if RepeatedMsgReduction Then</SourceLine>
+   <SourceLine>If s = LastLogString Then</SourceLine>
+   <SourceLine>LastLogCount = LastLogCount + 1</SourceLine>
+   <SourceLine>Else</SourceLine>
+   <SourceLine>LastLogString = s</SourceLine>
+   <SourceLine>LastLogCount = 0</SourceLine>
+   <SourceLine>End if</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>if LastLogCount &gt; 0 Then</SourceLine>
+   <SourceLine>s = "Last Message Repeated "+str(LastLogCount)+" Times"</SourceLine>
+   <SourceLine>if LastLogCount MOD 2 = 1 Then s = s + " "</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>if LastLogCount &gt; 1 Then</SourceLine>
+   <SourceLine>i = len(DebugLogPrefix+"Last Message Repeated "+str(LastLogCount-1)+" Times"+EndOfLine)+32+((LastLogCount-1) MOD 2)</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>DebugLogFile.Length = DebugLogFile.Length - i</SourceLine>
+   <SourceLine>DebugLogFile.Position = DebugLogFile.Length</SourceLine>
+   <SourceLine>DebugLogFile.Flush</SourceLine>
+   <SourceLine>End if</SourceLine>
+   <SourceLine>End if</SourceLine>
+   <SourceLine>#endif</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>Select Case Type</SourceLine>
+   <SourceLine>' Only Show on Development Build</SourceLine>
+   <SourceLine>Case LogType0_Debug</SourceLine>
+   <SourceLine>If App.StageCode = 0 Or DebugBuild Then</SourceLine>
+   <SourceLine>s = DebugLogPrefix+"&lt;Debug&gt;   ["+d.SQLDateTime+"] "+s</SourceLine>
+   <SourceLine>Else</SourceLine>
+   <SourceLine>s = ""</SourceLine>
+   <SourceLine>End If</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>' Only Show on Alpha Build and below</SourceLine>
+   <SourceLine>Case LogType1_Notice</SourceLine>
+   <SourceLine>If App.StageCode &lt; 2 Or DebugBuild Then</SourceLine>
+   <SourceLine>s = DebugLogPrefix+"&lt;Notice&gt;  ["+d.SQLDateTime+"] "+s</SourceLine>
+   <SourceLine>Else</SourceLine>
+   <SourceLine>s = ""</SourceLine>
+   <SourceLine>End If</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>' Beta Build</SourceLine>
+   <SourceLine>Case LogType2_Error</SourceLine>
+   <SourceLine>s = DebugLogPrefix+"&lt;Error&gt;   ["+d.SQLDateTime+"] "+s</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>Case LogType3_RunTime</SourceLine>
+   <SourceLine>s = DebugLogPrefix+"&lt;RunTime&gt; ["+d.SQLDateTime+"] "+s</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>End Select</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>if s &lt;&gt; "" Then</SourceLine>
+   <SourceLine>If DebugLogFile &lt;&gt; Nil Then</SourceLine>
+   <SourceLine>DebugLogFile.Write(EndOfLine+s)</SourceLine>
+   <SourceLine>DebugLogFile.Flush</SourceLine>
+   <SourceLine>Else</SourceLine>
+   <SourceLine>System.DebugLog(s)</SourceLine>
+   <SourceLine>End if</SourceLine>
+   <SourceLine>End if</SourceLine>
+   <SourceLine>End Sub</SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <AliasName></AliasName>
+  <ItemFlags>0</ItemFlags>
+  <Shared>0</Shared>
+  <ItemParams>Type As Integer, s As String</ItemParams>
+  <ItemResult></ItemResult>
+ </Method>
+ <Method>
+  <ItemName>LogMsg</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Sub LogMsg(Type As Integer, s As String, err As RuntimeException)</SourceLine>
+   <SourceLine>s = "("+str(err.ErrorNumber)+") "+err.Message+" ::: "+s</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>LogMsg(Type, s)</SourceLine>
+   <SourceLine>End Sub</SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <AliasName></AliasName>
+  <ItemFlags>0</ItemFlags>
+  <Shared>0</Shared>
+  <ItemParams>Type As Integer, s As String, err As RuntimeException</ItemParams>
+  <ItemResult></ItemResult>
+ </Method>
+ <Property>
+  <ItemName>DebugLogFile</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>DebugLogFile As BinaryStream</SourceLine>
+   <SourceLine></SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <ItemDeclaration>DebugLogFile As BinaryStream</ItemDeclaration>
+  <ItemFlags>0</ItemFlags>
+  <Shared>0</Shared>
+ </Property>
+ <Property>
+  <ItemName>LastLogCount</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>LastLogCount As UInt64</SourceLine>
+   <SourceLine></SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <ItemDeclaration>LastLogCount As UInt64 = 0</ItemDeclaration>
+  <ItemFlags>33</ItemFlags>
+  <Shared>0</Shared>
+ </Property>
+ <Property>
+  <ItemName>LastLogString</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>LastLogString As String</SourceLine>
+   <SourceLine></SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <ItemDeclaration>LastLogString As String</ItemDeclaration>
+  <ItemFlags>33</ItemFlags>
+  <Shared>0</Shared>
+ </Property>
+ <ViewBehavior>
+  <ViewProperty>
+   <ObjName>Name</ObjName>
+   <Visible>1</Visible>
+   <PropertyGroup>ID</PropertyGroup>
+   <InheritsFrom>Object</InheritsFrom>
+  </ViewProperty>
+  <ViewProperty>
+   <ObjName>Index</ObjName>
+   <Visible>1</Visible>
+   <PropertyGroup>ID</PropertyGroup>
+   <PropertyValue>-2147483648</PropertyValue>
+   <InheritsFrom>Object</InheritsFrom>
+  </ViewProperty>
+  <ViewProperty>
+   <ObjName>Super</ObjName>
+   <Visible>1</Visible>
+   <PropertyGroup>ID</PropertyGroup>
+   <InheritsFrom>Object</InheritsFrom>
+  </ViewProperty>
+  <ViewProperty>
+   <ObjName>Left</ObjName>
+   <Visible>1</Visible>
+   <PropertyGroup>Position</PropertyGroup>
+   <PropertyValue>0</PropertyValue>
+   <InheritsFrom>Object</InheritsFrom>
+  </ViewProperty>
+  <ViewProperty>
+   <ObjName>Top</ObjName>
+   <Visible>1</Visible>
+   <PropertyGroup>Position</PropertyGroup>
+   <PropertyValue>0</PropertyValue>
+   <InheritsFrom>Object</InheritsFrom>
+  </ViewProperty>
+ </ViewBehavior>
+ <Constant>
+  <ItemName>LogType0_Debug</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <TextEncoding>134217984</TextEncoding>
+  <ItemName>LogType0_Debug</ItemName>
+  <ItemType>2</ItemType>
+  <ItemDef>0</ItemDef>
+  <ItemFlags>0</ItemFlags>
+ </Constant>
+ <Constant>
+  <ItemName>LogType1_Notice</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <TextEncoding>134217984</TextEncoding>
+  <ItemName>LogType1_Notice</ItemName>
+  <ItemType>2</ItemType>
+  <ItemDef>1</ItemDef>
+  <ItemFlags>0</ItemFlags>
+ </Constant>
+ <Constant>
+  <ItemName>LogType2_Error</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <TextEncoding>134217984</TextEncoding>
+  <ItemName>LogType2_Error</ItemName>
+  <ItemType>2</ItemType>
+  <ItemDef>2</ItemDef>
+  <ItemFlags>0</ItemFlags>
+ </Constant>
+ <Constant>
+  <ItemName>LogType3_RunTime</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <TextEncoding>134217984</TextEncoding>
+  <ItemName>LogType3_RunTime</ItemName>
+  <ItemType>2</ItemType>
+  <ItemDef>3</ItemDef>
+  <ItemFlags>0</ItemFlags>
+ </Constant>
+ <Constant>
+  <ItemName>RepeatedMsgReduction</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <TextEncoding>134217984</TextEncoding>
+  <ItemName>RepeatedMsgReduction</ItemName>
+  <ItemType>3</ItemType>
+  <ItemDef>True</ItemDef>
+  <ItemFlags>33</ItemFlags>
+ </Constant>
+</block>
+</RBProject>

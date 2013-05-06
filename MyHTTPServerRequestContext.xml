@@ -1,0 +1,464 @@
+<?xml version="1.0"?>
+<RBProject version="2012r2.1" FormatVersion="2" MinIDEVersion="20070100">
+<block type="Module" ID="211757055">
+ <ObjName>MyHTTPServerRequestContext</ObjName>
+ <ObjContainerID>1566297957</ObjContainerID>
+ <IsClass>1</IsClass>
+ <ItemFlags>1</ItemFlags>
+ <IsInterface>0</IsInterface>
+ <Compatibility></Compatibility>
+ <Method>
+  <ItemName>Constructor</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Sub Constructor()</SourceLine>
+   <SourceLine>Dim d As New Date</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>Me.headers = New dictionary</SourceLine>
+   <SourceLine>Me.requestheaders = New dictionary</SourceLine>
+   <SourceLine>Me.cookies = New dictionary</SourceLine>
+   <SourceLine>Me.variables = New dictionary</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>// Header Date</SourceLine>
+   <SourceLine>Me.Headers.Value(MyHTTPServerModule.kHeaderDate) = d.HTTPDate</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>// Expire Date</SourceLine>
+   <SourceLine>d.Minute = d.Minute' + 60</SourceLine>
+   <SourceLine>Me.Headers.Value(MyHTTPServerModule.kHeaderExpires) = d.HTTPDate</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>// Default Content Type</SourceLine>
+   <SourceLine>Me.Headers.Value(MyHTTPServerModule.kHeaderContentType) = "text/html"</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>// Default Host</SourceLine>
+   <SourceLine>Me.Headers.Value(MyHTTPServerModule.kHeaderHost) = "127.0.0.1"</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>// Default Output</SourceLine>
+   <SourceLine>Me.statuscode = MyHTTPServerModule.kStatusNotFound</SourceLine>
+   <SourceLine>Me.Buffer = MyHTTPServerModule.HTTPErrorHTML(Me.statuscode)</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>LogMsg(LogType0_Debug, "HTTPServRequestContext: Constuct Request Context")</SourceLine>
+   <SourceLine>End Sub</SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <AliasName></AliasName>
+  <ItemFlags>0</ItemFlags>
+  <Shared>0</Shared>
+  <ItemParams></ItemParams>
+  <ItemResult></ItemResult>
+ </Method>
+ <Method>
+  <ItemName>Cookie</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Function Cookie(Name As String) As String</SourceLine>
+   <SourceLine>If Me.cookies.haskey(name) Then</SourceLine>
+   <SourceLine>Return Me.cookies.value(name)</SourceLine>
+   <SourceLine>Else</SourceLine>
+   <SourceLine>Return ""</SourceLine>
+   <SourceLine>End</SourceLine>
+   <SourceLine>End Function</SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <AliasName></AliasName>
+  <ItemFlags>0</ItemFlags>
+  <Shared>0</Shared>
+  <ItemParams>Name As String</ItemParams>
+  <ItemResult>String</ItemResult>
+ </Method>
+ <Method>
+  <ItemName>Destructor</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Sub Destructor()</SourceLine>
+   <SourceLine>LogMsg(LogType0_Debug, "HTTPServRequestContext: Destruct Request Context")</SourceLine>
+   <SourceLine>End Sub</SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <AliasName></AliasName>
+  <ItemFlags>0</ItemFlags>
+  <Shared>0</Shared>
+  <ItemParams></ItemParams>
+  <ItemResult></ItemResult>
+ </Method>
+ <Method>
+  <ItemName>Header</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Function Header(Key As String) As String</SourceLine>
+   <SourceLine>If requestheaders.haskey(key) Then</SourceLine>
+   <SourceLine>Return requestheaders.value(key).stringvalue</SourceLine>
+   <SourceLine>Else</SourceLine>
+   <SourceLine>Return ""</SourceLine>
+   <SourceLine>End</SourceLine>
+   <SourceLine>End Function</SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <AliasName></AliasName>
+  <ItemFlags>0</ItemFlags>
+  <Shared>0</Shared>
+  <ItemParams>Key As String</ItemParams>
+  <ItemResult>String</ItemResult>
+ </Method>
+ <Method>
+  <ItemName>LoadRequestParameters</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Sub LoadRequestParameters(FromString As String)</SourceLine>
+   <SourceLine>Dim lines() As String</SourceLine>
+   <SourceLine>Dim i As Integer</SourceLine>
+   <SourceLine>Dim key,value As String</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>requestheaders = New dictionary</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>// load request headers</SourceLine>
+   <SourceLine>lines = fromstring.Split(MyHTTPServerModule.crlf)</SourceLine>
+   <SourceLine>lines.remove 0</SourceLine>
+   <SourceLine>For i = 0 To ubound(lines)</SourceLine>
+   <SourceLine>key = Left(lines(i),InStr(lines(i),":") - 1)</SourceLine>
+   <SourceLine>value = Right(lines(i),Len(lines(i)) - (Len(key) + Len(": ")))</SourceLine>
+   <SourceLine>value = URLDecode(value)</SourceLine>
+   <SourceLine>requestheaders.value(key) = value</SourceLine>
+   <SourceLine>Next</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>// process request headers</SourceLine>
+   <SourceLine>Me.cookies = New dictionary</SourceLine>
+   <SourceLine>lines = header(MyHTTPServerModule.kheadercookie).Split("; ")</SourceLine>
+   <SourceLine>For i = 0 To ubound(lines)</SourceLine>
+   <SourceLine>key = Left(lines(i),InStr(lines(i),"=") - 1)</SourceLine>
+   <SourceLine>value = Right(lines(i),Len(lines(i)) - (Len(key) + Len("=")))</SourceLine>
+   <SourceLine>value = URLDecode(value)</SourceLine>
+   <SourceLine>Me.cookies.value(key) = value</SourceLine>
+   <SourceLine>Next</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>Dim sessionid As Integer</SourceLine>
+   <SourceLine>sessionid = Val(Me.cookie("session-id"))</SourceLine>
+   <SourceLine>psession = MyHTTPServerModule.findsession(sessionid)</SourceLine>
+   <SourceLine>End Sub</SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <AliasName></AliasName>
+  <ItemFlags>0</ItemFlags>
+  <Shared>0</Shared>
+  <ItemParams>FromString As String</ItemParams>
+  <ItemResult></ItemResult>
+ </Method>
+ <Method>
+  <ItemName>LoadVariables</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Sub LoadVariables(FromString As String)</SourceLine>
+   <SourceLine>Dim parts(),key,value As String</SourceLine>
+   <SourceLine>Dim i As Integer</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>parts = fromstring.Split("&amp;")</SourceLine>
+   <SourceLine>variables = New dictionary</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>For i = 0 To ubound(parts)</SourceLine>
+   <SourceLine>key = Left(parts(i),InStr(parts(i),"=") - 1)</SourceLine>
+   <SourceLine>value = Right(parts(i),Len(parts(i)) - (Len(key) + Len("=")))</SourceLine>
+   <SourceLine>value = URLDecode(value)</SourceLine>
+   <SourceLine>If variables.haskey(key) Then</SourceLine>
+   <SourceLine>variables.value(key) = variables.value(key) + "," + value</SourceLine>
+   <SourceLine>Else</SourceLine>
+   <SourceLine>variables.value(key) = value</SourceLine>
+   <SourceLine>End</SourceLine>
+   <SourceLine>Next</SourceLine>
+   <SourceLine>End Sub</SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <AliasName></AliasName>
+  <ItemFlags>0</ItemFlags>
+  <Shared>0</Shared>
+  <ItemParams>FromString As String</ItemParams>
+  <ItemResult></ItemResult>
+ </Method>
+ <Method>
+  <ItemName>Print</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Sub Print(Text As String)</SourceLine>
+   <SourceLine>If Me.unused Then</SourceLine>
+   <SourceLine>Me.unused = False</SourceLine>
+   <SourceLine>Me.buffer = ""</SourceLine>
+   <SourceLine>End</SourceLine>
+   <SourceLine>Me.buffer = Me.buffer + text</SourceLine>
+   <SourceLine>End Sub</SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <AliasName></AliasName>
+  <ItemFlags>0</ItemFlags>
+  <Shared>0</Shared>
+  <ItemParams>Text As String</ItemParams>
+  <ItemResult></ItemResult>
+ </Method>
+ <Method>
+  <ItemName>Session</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Function Session() As MyHTTPServerSession</SourceLine>
+   <SourceLine>Dim s As MyHTTPServerSession</SourceLine>
+   <SourceLine>If psession = Nil Then</SourceLine>
+   <SourceLine>s = MyHTTPServerModule.createsession</SourceLine>
+   <SourceLine>Me.setcookie("session-id",Str(s.identifier))</SourceLine>
+   <SourceLine>Else</SourceLine>
+   <SourceLine>s = psession</SourceLine>
+   <SourceLine>End</SourceLine>
+   <SourceLine>Return s</SourceLine>
+   <SourceLine>End Function</SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <AliasName></AliasName>
+  <ItemFlags>0</ItemFlags>
+  <Shared>0</Shared>
+  <ItemParams></ItemParams>
+  <ItemResult>MyHTTPServerSession</ItemResult>
+ </Method>
+ <Method>
+  <ItemName>SetCookie</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Sub SetCookie(Name As String, Value As String = "", Expire As Date = nil, Path As String = "/", Domain As String = ".", Secure As Boolean = False)</SourceLine>
+   <SourceLine>Dim s As String</SourceLine>
+   <SourceLine>s = name + "=" + value</SourceLine>
+   <SourceLine>If domain &lt;&gt; "." Then</SourceLine>
+   <SourceLine>s = s + "; domain=" + domain</SourceLine>
+   <SourceLine>End</SourceLine>
+   <SourceLine>If path &lt;&gt; "/" Then</SourceLine>
+   <SourceLine>s = s + "; path=" + path</SourceLine>
+   <SourceLine>End</SourceLine>
+   <SourceLine>If expire &lt;&gt; Nil Then</SourceLine>
+   <SourceLine>s = s + "; expire=" + expire.cookiedate</SourceLine>
+   <SourceLine>End</SourceLine>
+   <SourceLine>If secure Then</SourceLine>
+   <SourceLine>s = s + "; secure"</SourceLine>
+   <SourceLine>End</SourceLine>
+   <SourceLine>Me.headers.value("Set-Cookie") = s</SourceLine>
+   <SourceLine>End Sub</SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <AliasName></AliasName>
+  <ItemFlags>0</ItemFlags>
+  <Shared>0</Shared>
+  <ItemParams>Name As String, Value As String = "", Expire As Date = nil, Path As String = "/", Domain As String = ".", Secure As Boolean = False</ItemParams>
+  <ItemResult></ItemResult>
+ </Method>
+ <Method>
+  <ItemName>Variable</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Function Variable(Name As String) As String</SourceLine>
+   <SourceLine>If Me.variables.haskey(name) Then</SourceLine>
+   <SourceLine>Return Me.variables.value(name)</SourceLine>
+   <SourceLine>Else</SourceLine>
+   <SourceLine>Return ""</SourceLine>
+   <SourceLine>End</SourceLine>
+   <SourceLine>End Function</SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <AliasName></AliasName>
+  <ItemFlags>0</ItemFlags>
+  <Shared>0</Shared>
+  <ItemParams>Name As String</ItemParams>
+  <ItemResult>String</ItemResult>
+ </Method>
+ <Property>
+  <ItemName>Buffer</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Buffer As String</SourceLine>
+   <SourceLine></SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <ItemDeclaration>Buffer As String</ItemDeclaration>
+  <ItemFlags>0</ItemFlags>
+  <Shared>0</Shared>
+ </Property>
+ <Property>
+  <ItemName>Cookies</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Cookies As Dictionary</SourceLine>
+   <SourceLine></SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <ItemDeclaration>Cookies As Dictionary</ItemDeclaration>
+  <ItemFlags>33</ItemFlags>
+  <Shared>0</Shared>
+ </Property>
+ <Property>
+  <ItemName>Entity</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Entity As String</SourceLine>
+   <SourceLine></SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <ItemDeclaration>Entity As String</ItemDeclaration>
+  <ItemFlags>0</ItemFlags>
+  <Shared>0</Shared>
+ </Property>
+ <Property>
+  <ItemName>Headers</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Headers As Dictionary</SourceLine>
+   <SourceLine></SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <ItemDeclaration>Headers As Dictionary</ItemDeclaration>
+  <ItemFlags>0</ItemFlags>
+  <Shared>0</Shared>
+ </Property>
+ <Property>
+  <ItemName>pSession</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>pSession As MyHTTPServerSession</SourceLine>
+   <SourceLine></SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <ItemDeclaration>pSession As MyHTTPServerSession</ItemDeclaration>
+  <ItemFlags>33</ItemFlags>
+  <Shared>0</Shared>
+ </Property>
+ <Property>
+  <ItemName>RequestHeaders</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>RequestHeaders As Dictionary</SourceLine>
+   <SourceLine></SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <ItemDeclaration>RequestHeaders As Dictionary</ItemDeclaration>
+  <ItemFlags>33</ItemFlags>
+  <Shared>0</Shared>
+ </Property>
+ <Property>
+  <ItemName>StatusCode</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>StatusCode As Integer</SourceLine>
+   <SourceLine></SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <ItemDeclaration>StatusCode As Integer</ItemDeclaration>
+  <ItemFlags>0</ItemFlags>
+  <Shared>0</Shared>
+ </Property>
+ <Property>
+  <ItemName>Unused</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Unused As Boolean</SourceLine>
+   <SourceLine></SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <ItemDeclaration>Unused As Boolean = True</ItemDeclaration>
+  <ItemFlags>33</ItemFlags>
+  <Shared>0</Shared>
+ </Property>
+ <Property>
+  <ItemName>Variables</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Variables As Dictionary</SourceLine>
+   <SourceLine></SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <ItemDeclaration>Variables As Dictionary</ItemDeclaration>
+  <ItemFlags>33</ItemFlags>
+  <Shared>0</Shared>
+ </Property>
+ <ViewBehavior>
+  <ViewProperty>
+   <ObjName>Buffer</ObjName>
+   <PropertyGroup>Behavior</PropertyGroup>
+   <ItemType>String</ItemType>
+   <EditorType>MultiLineEditor</EditorType>
+  </ViewProperty>
+  <ViewProperty>
+   <ObjName>Entity</ObjName>
+   <PropertyGroup>Behavior</PropertyGroup>
+   <ItemType>String</ItemType>
+   <EditorType>MultiLineEditor</EditorType>
+  </ViewProperty>
+  <ViewProperty>
+   <ObjName>Index</ObjName>
+   <Visible>1</Visible>
+   <PropertyGroup>ID</PropertyGroup>
+   <PropertyValue>-2147483648</PropertyValue>
+   <InheritsFrom>Object</InheritsFrom>
+  </ViewProperty>
+  <ViewProperty>
+   <ObjName>Left</ObjName>
+   <Visible>1</Visible>
+   <PropertyGroup>Position</PropertyGroup>
+   <PropertyValue>0</PropertyValue>
+   <InheritsFrom>Object</InheritsFrom>
+  </ViewProperty>
+  <ViewProperty>
+   <ObjName>Name</ObjName>
+   <Visible>1</Visible>
+   <PropertyGroup>ID</PropertyGroup>
+   <InheritsFrom>Object</InheritsFrom>
+  </ViewProperty>
+  <ViewProperty>
+   <ObjName>StatusCode</ObjName>
+   <PropertyGroup>Behavior</PropertyGroup>
+   <PropertyValue>0</PropertyValue>
+   <ItemType>Integer</ItemType>
+  </ViewProperty>
+  <ViewProperty>
+   <ObjName>Super</ObjName>
+   <Visible>1</Visible>
+   <PropertyGroup>ID</PropertyGroup>
+   <InheritsFrom>Object</InheritsFrom>
+  </ViewProperty>
+  <ViewProperty>
+   <ObjName>Top</ObjName>
+   <Visible>1</Visible>
+   <PropertyGroup>Position</PropertyGroup>
+   <PropertyValue>0</PropertyValue>
+   <InheritsFrom>Object</InheritsFrom>
+  </ViewProperty>
+ </ViewBehavior>
+</block>
+</RBProject>

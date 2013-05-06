@@ -1,0 +1,484 @@
+<?xml version="1.0"?>
+<RBProject version="2012r2.1" FormatVersion="2" MinIDEVersion="20070100">
+<block type="Module" ID="1473691647">
+ <ObjName>MyHTTPServerSocket</ObjName>
+ <ObjContainerID>1566297957</ObjContainerID>
+ <IsClass>1</IsClass>
+ <Superclass>ServerSocket</Superclass>
+ <ItemFlags>1</ItemFlags>
+ <IsInterface>0</IsInterface>
+ <Compatibility></Compatibility>
+ <HookInstance>
+  <ItemName>AddSocket</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Function AddSocket() As TCPSocket</SourceLine>
+   <SourceLine>Dim s As MyHTTPServerClientHandler</SourceLine>
+   <SourceLine>s = New MyHTTPServerClientHandler</SourceLine>
+   <SourceLine>s.parent = Self</SourceLine>
+   <SourceLine>Return s</SourceLine>
+   <SourceLine>End Function</SourceLine>
+  </ItemSource>
+ </HookInstance>
+ <HookInstance>
+  <ItemName>Error</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Sub Error(ErrorCode as Integer)</SourceLine>
+   <SourceLine>LogMsg(LogType2_Error, "HTTPServSock: Error Num "+str(ErrorCode))</SourceLine>
+   <SourceLine>End Sub</SourceLine>
+  </ItemSource>
+ </HookInstance>
+ <Method>
+  <ItemName>AddURL</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Sub AddURL(URL As String, File As FolderItem)</SourceLine>
+   <SourceLine>Dim i As Integer</SourceLine>
+   <SourceLine>urls.value(url) = file</SourceLine>
+   <SourceLine>End Sub</SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <AliasName></AliasName>
+  <ItemFlags>0</ItemFlags>
+  <Shared>0</Shared>
+  <ItemParams>URL As String, File As FolderItem</ItemParams>
+  <ItemResult></ItemResult>
+ </Method>
+ <Method>
+  <ItemName>AddURL</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Sub AddURL(URL As String, Handler As MyHTTPServerRequestHandler)</SourceLine>
+   <SourceLine>urls.value(url) = handler</SourceLine>
+   <SourceLine>End Sub</SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <AliasName></AliasName>
+  <ItemFlags>0</ItemFlags>
+  <Shared>0</Shared>
+  <ItemParams>URL As String, Handler As MyHTTPServerRequestHandler</ItemParams>
+  <ItemResult></ItemResult>
+ </Method>
+ <Method>
+  <ItemName>Close</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Sub Close()</SourceLine>
+   <SourceLine>Dim i, tmp, CloseTry As Integer</SourceLine>
+   <SourceLine>Dim TCPSocketList() As TCPSocket</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>If Self.IsListening Then Self.StopListening</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>if Self.ActiveConnections.Ubound &gt; -1 Then</SourceLine>
+   <SourceLine>TCPSocketList = Self.ActiveConnections</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>CloseTry = 0</SourceLine>
+   <SourceLine>i = 0</SourceLine>
+   <SourceLine>tmp = TCPSocketList.Ubound</SourceLine>
+   <SourceLine>While TCPSocketList.Ubound &gt; -1</SourceLine>
+   <SourceLine>TCPSocketList(0).Disconnect</SourceLine>
+   <SourceLine>TCPSocketList.Remove(0)</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>if tmp = TCPSocketList.Ubound Then</SourceLine>
+   <SourceLine>CloseTry = CloseTry + 1</SourceLine>
+   <SourceLine>if CloseTry &gt; 3 Then</SourceLine>
+   <SourceLine>LogMsg(LogType2_Error, "HTTPServSock: Error trying to close server socket, "+str(TCPSocketList.Ubound+1)+" sockets left")</SourceLine>
+   <SourceLine>exit while</SourceLine>
+   <SourceLine>End if</SourceLine>
+   <SourceLine>Else</SourceLine>
+   <SourceLine>tmp = TCPSocketList.Ubound</SourceLine>
+   <SourceLine>End if</SourceLine>
+   <SourceLine>Wend</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>LogMsg(LogType1_Notice, "HTTPServSock: Server Stopped ("+Str(TCPSocketList.Ubound + 1)+")")</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>End if</SourceLine>
+   <SourceLine>End Sub</SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <AliasName></AliasName>
+  <ItemFlags>0</ItemFlags>
+  <Shared>0</Shared>
+  <ItemParams></ItemParams>
+  <ItemResult></ItemResult>
+ </Method>
+ <Method>
+  <ItemName>Constructor</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Sub Constructor()</SourceLine>
+   <SourceLine>LogMsg(LogType0_Debug, "HTTPServSock: Constuct")</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>Me.port = MyHTTPServerModule.kDefaultPort</SourceLine>
+   <SourceLine>Me.urls = New dictionary</SourceLine>
+   <SourceLine>Me.indexfiles.append("index.html")</SourceLine>
+   <SourceLine>End Sub</SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <AliasName></AliasName>
+  <ItemFlags>0</ItemFlags>
+  <Shared>0</Shared>
+  <ItemParams></ItemParams>
+  <ItemResult></ItemResult>
+ </Method>
+ <Method>
+  <ItemName>Constructor</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Sub Constructor(Port As Integer)</SourceLine>
+   <SourceLine>Me.constructor</SourceLine>
+   <SourceLine>Me.port = port</SourceLine>
+   <SourceLine>End Sub</SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <AliasName></AliasName>
+  <ItemFlags>0</ItemFlags>
+  <Shared>0</Shared>
+  <ItemParams>Port As Integer</ItemParams>
+  <ItemResult></ItemResult>
+ </Method>
+ <Method>
+  <ItemName>Destructor</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Sub Destructor()</SourceLine>
+   <SourceLine>Self.Close</SourceLine>
+   <SourceLine>LogMsg(LogType0_Debug, "HTTPServSock: Destruct")</SourceLine>
+   <SourceLine>End Sub</SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <AliasName></AliasName>
+  <ItemFlags>1</ItemFlags>
+  <Shared>0</Shared>
+  <ItemParams></ItemParams>
+  <ItemResult></ItemResult>
+ </Method>
+ <Method>
+  <ItemName>ForwardContext</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Sub ForwardContext(URL As String, Context As MyHTTPServerRequestContext)</SourceLine>
+   <SourceLine>Dim v As variant</SourceLine>
+   <SourceLine>Dim handler As MyHTTPServerRequestHandler</SourceLine>
+   <SourceLine>Dim t As TextInputStream</SourceLine>
+   <SourceLine>Dim i As Integer</SourceLine>
+   <SourceLine>Dim baseurl As String</SourceLine>
+   <SourceLine>Dim file As String = ""</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>' If no match then go hunting</SourceLine>
+   <SourceLine>If urls.haskey(url) = False Then</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>' Check for index file</SourceLine>
+   <SourceLine>If Right(url, 1) = "/" Then</SourceLine>
+   <SourceLine>For i = 0 To ubound(indexfiles)</SourceLine>
+   <SourceLine>If urls.haskey(url + indexfiles(i)) Then</SourceLine>
+   <SourceLine>url = url + indexfiles(i)</SourceLine>
+   <SourceLine>Exit For</SourceLine>
+   <SourceLine>End If</SourceLine>
+   <SourceLine>Next</SourceLine>
+   <SourceLine>End If</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>If urls.haskey(url) = False Then ' Check for base directory</SourceLine>
+   <SourceLine>baseurl = url</SourceLine>
+   <SourceLine>While InStr(0, baseurl, "/") &gt; 0</SourceLine>
+   <SourceLine>baseurl = url.Left(MyHTTPServerModule.InStrReverse(Len(baseurl)-1, baseurl, "/"))</SourceLine>
+   <SourceLine>If urls.haskey(baseurl) Then</SourceLine>
+   <SourceLine>file = url.Right(Len(url)-Len(baseurl))</SourceLine>
+   <SourceLine>url = baseurl</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>Exit While</SourceLine>
+   <SourceLine>End If</SourceLine>
+   <SourceLine>Wend</SourceLine>
+   <SourceLine>End If</SourceLine>
+   <SourceLine>End If</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>If urls.haskey(url) Then</SourceLine>
+   <SourceLine>v = urls.value(url)</SourceLine>
+   <SourceLine>#pragma BreakOnExceptions Off</SourceLine>
+   <SourceLine>If v IsA folderitem Then</SourceLine>
+   <SourceLine>Dim f As FolderItem</SourceLine>
+   <SourceLine>f = v</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>If f.Exists Then</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>If file &lt;&gt; "" Then</SourceLine>
+   <SourceLine>Dim tmpf As FolderItem</SourceLine>
+   <SourceLine>tmpf = New FolderItem(f.URLPath+MyHTTPServerModule.URLEncode(file), FolderItem.PathTypeURL)</SourceLine>
+   <SourceLine>If tmpf.Exists Then</SourceLine>
+   <SourceLine>f = New FolderItem(tmpf)</SourceLine>
+   <SourceLine>tmpf = Nil</SourceLine>
+   <SourceLine>Else</SourceLine>
+   <SourceLine>tmpf = Nil</SourceLine>
+   <SourceLine>Raise New RuntimeException</SourceLine>
+   <SourceLine>End If</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>End If</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>If f.Directory Then</SourceLine>
+   <SourceLine>' Check for index files in directory</SourceLine>
+   <SourceLine>For i = 0 To ubound(indexfiles)</SourceLine>
+   <SourceLine>If f.Child(indexfiles(i)).Exists Then</SourceLine>
+   <SourceLine>f = f.Child(indexfiles(i))</SourceLine>
+   <SourceLine>Exit For</SourceLine>
+   <SourceLine>End If</SourceLine>
+   <SourceLine>Next</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>' No file found, showing index</SourceLine>
+   <SourceLine>If f.Directory Then</SourceLine>
+   <SourceLine>Context.Print(HTTPDirectoryHTML(url+file, f))</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>Context.statuscode = MyHTTPServerModule.kstatusok</SourceLine>
+   <SourceLine>End If</SourceLine>
+   <SourceLine>End If</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>If f.Directory = False Then</SourceLine>
+   <SourceLine>Context.Headers.Value(MyHTTPServerModule.kHeaderContentType) = MyHTTPServerModule.HTTPMimeString(f.FileExtension)</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>Dim ReadStream As BinaryStream = BinaryStream.Open(f, False)</SourceLine>
+   <SourceLine>If ReadStream.Length &gt; 0 Then</SourceLine>
+   <SourceLine>Context.Buffer = ReadStream.Read(ReadStream.Length)</SourceLine>
+   <SourceLine>ReadStream.Close</SourceLine>
+   <SourceLine>ReadStream = Nil</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>Context.statuscode = MyHTTPServerModule.kstatusok</SourceLine>
+   <SourceLine>Else</SourceLine>
+   <SourceLine>Context.statuscode = MyHTTPServerModule.kStatusInternalServerError</SourceLine>
+   <SourceLine>context.buffer = MyHTTPServerModule.HTTPErrorHTML(context.statuscode)</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>End If</SourceLine>
+   <SourceLine>End If</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>f = Nil</SourceLine>
+   <SourceLine>Else</SourceLine>
+   <SourceLine>f = Nil</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>// File does not exist, Send a 404 Error</SourceLine>
+   <SourceLine>context.statuscode = MyHTTPServerModule.kStatusNotFound</SourceLine>
+   <SourceLine>context.buffer = MyHTTPServerModule.HTTPErrorHTML(context.statuscode)</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>End If</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>Elseif v IsA MyHTTPServerRequestHandler Then</SourceLine>
+   <SourceLine>handler = MyHTTPServerRequestHandler(v)</SourceLine>
+   <SourceLine>handler.handlerequest(context)</SourceLine>
+   <SourceLine>End If</SourceLine>
+   <SourceLine>#pragma BreakOnExceptions Default</SourceLine>
+   <SourceLine>End If</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>Exception err</SourceLine>
+   <SourceLine>context.statuscode = MyHTTPServerModule.kstatusinternalservererror</SourceLine>
+   <SourceLine>context.buffer = MyHTTPServerModule.HTTPErrorHTML(context.statuscode)</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>'Raise err</SourceLine>
+   <SourceLine>End Sub</SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <AliasName></AliasName>
+  <ItemFlags>0</ItemFlags>
+  <Shared>0</Shared>
+  <ItemParams>URL As String, Context As MyHTTPServerRequestContext</ItemParams>
+  <ItemResult></ItemResult>
+ </Method>
+ <Method>
+  <ItemName>Listen</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Sub Listen()</SourceLine>
+   <SourceLine>LogMsg(LogType1_Notice, "HTTPServSock: Start Listening")</SourceLine>
+   <SourceLine>Super.Listen</SourceLine>
+   <SourceLine>End Sub</SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <AliasName></AliasName>
+  <ItemFlags>0</ItemFlags>
+  <Shared>0</Shared>
+  <ItemParams></ItemParams>
+  <ItemResult></ItemResult>
+ </Method>
+ <Method>
+  <ItemName>RemoveURL</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Sub RemoveURL(URL As String)</SourceLine>
+   <SourceLine>If urls.haskey(url) Then</SourceLine>
+   <SourceLine>urls.remove(url)</SourceLine>
+   <SourceLine>End</SourceLine>
+   <SourceLine>End Sub</SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <AliasName></AliasName>
+  <ItemFlags>0</ItemFlags>
+  <Shared>0</Shared>
+  <ItemParams>URL As String</ItemParams>
+  <ItemResult></ItemResult>
+ </Method>
+ <Method>
+  <ItemName>SocketCount</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Function SocketCount() As Integer</SourceLine>
+   <SourceLine>Return Self.ActiveConnections.Ubound+1</SourceLine>
+   <SourceLine>End Function</SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <AliasName></AliasName>
+  <ItemFlags>0</ItemFlags>
+  <Shared>0</Shared>
+  <ItemParams></ItemParams>
+  <ItemResult>Integer</ItemResult>
+ </Method>
+ <Method>
+  <ItemName>StopListening</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Sub StopListening()</SourceLine>
+   <SourceLine>LogMsg(LogType1_Notice, "HTTPServSock: Stop Listening")</SourceLine>
+   <SourceLine>Super.StopListening</SourceLine>
+   <SourceLine>End Sub</SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <AliasName></AliasName>
+  <ItemFlags>0</ItemFlags>
+  <Shared>0</Shared>
+  <ItemParams></ItemParams>
+  <ItemResult></ItemResult>
+ </Method>
+ <Property>
+  <ItemName>ClientTimeOut</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>ClientTimeOut As Integer</SourceLine>
+   <SourceLine></SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <ItemDeclaration>ClientTimeOut As Integer = 10</ItemDeclaration>
+  <ItemFlags>0</ItemFlags>
+  <Shared>0</Shared>
+ </Property>
+ <Property>
+  <ItemName>IndexFiles()</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>IndexFiles() As String</SourceLine>
+   <SourceLine></SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <ItemDeclaration>IndexFiles() As String</ItemDeclaration>
+  <ItemFlags>0</ItemFlags>
+  <Shared>0</Shared>
+ </Property>
+ <Property>
+  <ItemName>URLs</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>URLs As Dictionary</SourceLine>
+   <SourceLine></SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <ItemDeclaration>URLs As Dictionary</ItemDeclaration>
+  <ItemFlags>33</ItemFlags>
+  <Shared>0</Shared>
+ </Property>
+ <ViewBehavior>
+  <ViewProperty>
+   <ObjName>ClientTimeOut</ObjName>
+   <PropertyGroup>Behavior</PropertyGroup>
+   <PropertyValue>10</PropertyValue>
+   <ItemType>Integer</ItemType>
+  </ViewProperty>
+  <ViewProperty>
+   <ObjName>Index</ObjName>
+   <Visible>1</Visible>
+   <PropertyGroup>ID</PropertyGroup>
+   <ItemType>Integer</ItemType>
+   <InheritsFrom>ServerSocket</InheritsFrom>
+  </ViewProperty>
+  <ViewProperty>
+   <ObjName>Left</ObjName>
+   <Visible>1</Visible>
+   <PropertyGroup>Position</PropertyGroup>
+   <InheritsFrom>ServerSocket</InheritsFrom>
+  </ViewProperty>
+  <ViewProperty>
+   <ObjName>MaximumSocketsConnected</ObjName>
+   <Visible>1</Visible>
+   <PropertyGroup>Behavior</PropertyGroup>
+   <PropertyValue>10</PropertyValue>
+   <ItemType>Integer</ItemType>
+   <InheritsFrom>ServerSocket</InheritsFrom>
+  </ViewProperty>
+  <ViewProperty>
+   <ObjName>MinimumSocketsAvailable</ObjName>
+   <Visible>1</Visible>
+   <PropertyGroup>Behavior</PropertyGroup>
+   <PropertyValue>2</PropertyValue>
+   <ItemType>Integer</ItemType>
+   <InheritsFrom>ServerSocket</InheritsFrom>
+  </ViewProperty>
+  <ViewProperty>
+   <ObjName>Name</ObjName>
+   <Visible>1</Visible>
+   <PropertyGroup>ID</PropertyGroup>
+   <InheritsFrom>ServerSocket</InheritsFrom>
+  </ViewProperty>
+  <ViewProperty>
+   <ObjName>Port</ObjName>
+   <Visible>1</Visible>
+   <PropertyGroup>Behavior</PropertyGroup>
+   <PropertyValue>0</PropertyValue>
+   <ItemType>Integer</ItemType>
+   <InheritsFrom>ServerSocket</InheritsFrom>
+  </ViewProperty>
+  <ViewProperty>
+   <ObjName>Super</ObjName>
+   <Visible>1</Visible>
+   <PropertyGroup>ID</PropertyGroup>
+   <InheritsFrom>ServerSocket</InheritsFrom>
+  </ViewProperty>
+  <ViewProperty>
+   <ObjName>Top</ObjName>
+   <Visible>1</Visible>
+   <PropertyGroup>Position</PropertyGroup>
+   <InheritsFrom>ServerSocket</InheritsFrom>
+  </ViewProperty>
+ </ViewBehavior>
+</block>
+</RBProject>

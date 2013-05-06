@@ -1,0 +1,196 @@
+<?xml version="1.0"?>
+<RBProject version="2012r2.1" FormatVersion="2" MinIDEVersion="20070100">
+<block type="Module" ID="393076735">
+ <ObjName>MyHTTPServerSession</ObjName>
+ <ObjContainerID>1566297957</ObjContainerID>
+ <IsClass>1</IsClass>
+ <ItemFlags>1</ItemFlags>
+ <IsInterface>0</IsInterface>
+ <Compatibility></Compatibility>
+ <Method>
+  <ItemName>Constructor</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Sub Constructor()</SourceLine>
+   <SourceLine>data = new dictionary</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>uid = Lastuid + 1</SourceLine>
+   <SourceLine>Lastuid = uid</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>LogMsg(LogType0_Debug, "HTTPServSession("+str(uid)+"): Construct")</SourceLine>
+   <SourceLine>End Sub</SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <AliasName></AliasName>
+  <ItemFlags>0</ItemFlags>
+  <Shared>0</Shared>
+  <ItemParams></ItemParams>
+  <ItemResult></ItemResult>
+ </Method>
+ <Method>
+  <ItemName>Destructor</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Sub Destructor()</SourceLine>
+   <SourceLine>LogMsg(LogType0_Debug, "HTTPServSession("+str(uid)+"): Destruct")</SourceLine>
+   <SourceLine>End Sub</SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <AliasName></AliasName>
+  <ItemFlags>0</ItemFlags>
+  <Shared>0</Shared>
+  <ItemParams></ItemParams>
+  <ItemResult></ItemResult>
+ </Method>
+ <Method>
+  <ItemName>Identifier</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Function Identifier() As Integer</SourceLine>
+   <SourceLine>return uid</SourceLine>
+   <SourceLine>End Function</SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <AliasName></AliasName>
+  <ItemFlags>0</ItemFlags>
+  <Shared>0</Shared>
+  <ItemParams></ItemParams>
+  <ItemResult>Integer</ItemResult>
+ </Method>
+ <Method>
+  <ItemName>Value</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Function Value(Key As String) As Variant</SourceLine>
+   <SourceLine>if data.haskey(key) then</SourceLine>
+   <SourceLine>return data.value(key)</SourceLine>
+   <SourceLine>else</SourceLine>
+   <SourceLine>return ""</SourceLine>
+   <SourceLine>end</SourceLine>
+   <SourceLine>End Function</SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <AliasName></AliasName>
+  <ItemFlags>0</ItemFlags>
+  <Shared>0</Shared>
+  <ItemParams>Key As String</ItemParams>
+  <ItemResult>Variant</ItemResult>
+ </Method>
+ <Method>
+  <ItemName>Value</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Sub Value(Key As String, Assigns NewValue As Variant)</SourceLine>
+   <SourceLine>data.value(key) = newvalue</SourceLine>
+   <SourceLine>End Sub</SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <AliasName></AliasName>
+  <ItemFlags>0</ItemFlags>
+  <Shared>0</Shared>
+  <ItemParams>Key As String, Assigns NewValue As Variant</ItemParams>
+  <ItemResult></ItemResult>
+ </Method>
+ <Property>
+  <ItemName>Data</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Data As Dictionary</SourceLine>
+   <SourceLine></SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <ItemDeclaration>Data As Dictionary</ItemDeclaration>
+  <ItemFlags>33</ItemFlags>
+  <Shared>0</Shared>
+ </Property>
+ <Property>
+  <ItemName>Lastuid</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Shared Lastuid As Int64</SourceLine>
+   <SourceLine></SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <ItemDeclaration>Lastuid As Int64 = 100</ItemDeclaration>
+  <ItemFlags>33</ItemFlags>
+  <Shared>1</Shared>
+ </Property>
+ <Property>
+  <ItemName>Rand</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Shared Rand As Random</SourceLine>
+   <SourceLine></SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <ItemDeclaration>Rand As Random</ItemDeclaration>
+  <ItemFlags>33</ItemFlags>
+  <Shared>1</Shared>
+ </Property>
+ <Property>
+  <ItemName>uid</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>uid As Int64</SourceLine>
+   <SourceLine></SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <ItemDeclaration>uid As Int64</ItemDeclaration>
+  <ItemFlags>33</ItemFlags>
+  <Shared>0</Shared>
+ </Property>
+ <ViewBehavior>
+  <ViewProperty>
+   <ObjName>Index</ObjName>
+   <Visible>1</Visible>
+   <PropertyGroup>ID</PropertyGroup>
+   <PropertyValue>-2147483648</PropertyValue>
+   <InheritsFrom>Object</InheritsFrom>
+  </ViewProperty>
+  <ViewProperty>
+   <ObjName>Left</ObjName>
+   <Visible>1</Visible>
+   <PropertyGroup>Position</PropertyGroup>
+   <PropertyValue>0</PropertyValue>
+   <InheritsFrom>Object</InheritsFrom>
+  </ViewProperty>
+  <ViewProperty>
+   <ObjName>Name</ObjName>
+   <Visible>1</Visible>
+   <PropertyGroup>ID</PropertyGroup>
+   <InheritsFrom>Object</InheritsFrom>
+  </ViewProperty>
+  <ViewProperty>
+   <ObjName>Super</ObjName>
+   <Visible>1</Visible>
+   <PropertyGroup>ID</PropertyGroup>
+   <InheritsFrom>Object</InheritsFrom>
+  </ViewProperty>
+  <ViewProperty>
+   <ObjName>Top</ObjName>
+   <Visible>1</Visible>
+   <PropertyGroup>Position</PropertyGroup>
+   <PropertyValue>0</PropertyValue>
+   <InheritsFrom>Object</InheritsFrom>
+  </ViewProperty>
+ </ViewBehavior>
+</block>
+</RBProject>
