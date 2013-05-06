@@ -1,8 +1,8 @@
-RBHTTPServer
-============
+Xojo-HTTPServer
+===============
 
 
-A http server class for RealBasic licensed under the MIT License.
+A http server class for Xojo / RealBasic licensed under the MIT License.
 
 
 If any one needs help using these classes you can reach me at bskrtich *AT* kiltish.com
