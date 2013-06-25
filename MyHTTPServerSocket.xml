@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<RBProject version="2012r2.1" FormatVersion="2" MinIDEVersion="20070100">
+<RBProject version="2013r1" FormatVersion="2" MinIDEVersion="20070100">
 <block type="Module" ID="1473691647">
  <ObjName>MyHTTPServerSocket</ObjName>
  <ObjContainerID>1566297957</ObjContainerID>
@@ -47,7 +47,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>0</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams>URL As String, File As FolderItem</ItemParams>
   <ItemResult></ItemResult>
  </Method>
@@ -64,7 +64,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>0</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams>URL As String, Handler As MyHTTPServerRequestHandler</ItemParams>
   <ItemResult></ItemResult>
  </Method>
@@ -80,7 +80,7 @@
    <SourceLine></SourceLine>
    <SourceLine>If Self.IsListening Then Self.StopListening</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>if Self.ActiveConnections.Ubound &gt; -1 Then</SourceLine>
+   <SourceLine>If Self.ActiveConnections.Ubound &gt; -1 Then</SourceLine>
    <SourceLine>TCPSocketList = Self.ActiveConnections</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>CloseTry = 0</SourceLine>
@@ -90,26 +90,26 @@
    <SourceLine>TCPSocketList(0).Disconnect</SourceLine>
    <SourceLine>TCPSocketList.Remove(0)</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>if tmp = TCPSocketList.Ubound Then</SourceLine>
+   <SourceLine>If tmp = TCPSocketList.Ubound Then</SourceLine>
    <SourceLine>CloseTry = CloseTry + 1</SourceLine>
-   <SourceLine>if CloseTry &gt; 3 Then</SourceLine>
-   <SourceLine>LogMsg(LogType2_Error, "HTTPServSock: Error trying to close server socket, "+str(TCPSocketList.Ubound+1)+" sockets left")</SourceLine>
-   <SourceLine>exit while</SourceLine>
-   <SourceLine>End if</SourceLine>
+   <SourceLine>If CloseTry &gt; 3 Then</SourceLine>
+   <SourceLine>LogMsg(LogType2_Error, "HTTPServSock: Error trying to close server socket, "+Str(TCPSocketList.Ubound+1)+" sockets left")</SourceLine>
+   <SourceLine>Exit While</SourceLine>
+   <SourceLine>End If</SourceLine>
    <SourceLine>Else</SourceLine>
    <SourceLine>tmp = TCPSocketList.Ubound</SourceLine>
-   <SourceLine>End if</SourceLine>
+   <SourceLine>End If</SourceLine>
    <SourceLine>Wend</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>LogMsg(LogType1_Notice, "HTTPServSock: Server Stopped ("+Str(TCPSocketList.Ubound + 1)+")")</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>End if</SourceLine>
+   <SourceLine>End If</SourceLine>
    <SourceLine>End Sub</SourceLine>
   </ItemSource>
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>0</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams></ItemParams>
   <ItemResult></ItemResult>
  </Method>
@@ -130,7 +130,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>0</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams></ItemParams>
   <ItemResult></ItemResult>
  </Method>
@@ -148,7 +148,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>0</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams>Port As Integer</ItemParams>
   <ItemResult></ItemResult>
  </Method>
@@ -166,7 +166,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>1</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams></ItemParams>
   <ItemResult></ItemResult>
  </Method>
@@ -229,7 +229,12 @@
    <SourceLine>tmpf = Nil</SourceLine>
    <SourceLine>Else</SourceLine>
    <SourceLine>tmpf = Nil</SourceLine>
-   <SourceLine>Raise New RuntimeException</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>// File Not Found</SourceLine>
+   <SourceLine>context.statuscode = MyHTTPServerModule.kStatusNotFound</SourceLine>
+   <SourceLine>context.buffer = MyHTTPServerModule.HTTPErrorHTML(context.statuscode)</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>Exit Sub</SourceLine>
    <SourceLine>End If</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>End If</SourceLine>
@@ -299,7 +304,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>0</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams>URL As String, Context As MyHTTPServerRequestContext</ItemParams>
   <ItemResult></ItemResult>
  </Method>
@@ -317,7 +322,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>0</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams></ItemParams>
   <ItemResult></ItemResult>
  </Method>
@@ -336,7 +341,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>0</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams>URL As String</ItemParams>
   <ItemResult></ItemResult>
  </Method>
@@ -353,7 +358,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>0</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams></ItemParams>
   <ItemResult>Integer</ItemResult>
  </Method>
@@ -371,7 +376,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>0</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams></ItemParams>
   <ItemResult></ItemResult>
  </Method>
@@ -387,7 +392,7 @@
   <TextEncoding>134217984</TextEncoding>
   <ItemDeclaration>ClientTimeOut As Integer = 10</ItemDeclaration>
   <ItemFlags>0</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
  </Property>
  <Property>
   <ItemName>IndexFiles()</ItemName>
@@ -401,7 +406,7 @@
   <TextEncoding>134217984</TextEncoding>
   <ItemDeclaration>IndexFiles() As String</ItemDeclaration>
   <ItemFlags>0</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
  </Property>
  <Property>
   <ItemName>URLs</ItemName>
@@ -415,7 +420,7 @@
   <TextEncoding>134217984</TextEncoding>
   <ItemDeclaration>URLs As Dictionary</ItemDeclaration>
   <ItemFlags>33</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
  </Property>
  <ViewBehavior>
   <ViewProperty>
@@ -435,6 +440,7 @@
    <ObjName>Left</ObjName>
    <Visible>1</Visible>
    <PropertyGroup>Position</PropertyGroup>
+   <ItemType>Integer</ItemType>
    <InheritsFrom>ServerSocket</InheritsFrom>
   </ViewProperty>
   <ViewProperty>
@@ -457,6 +463,7 @@
    <ObjName>Name</ObjName>
    <Visible>1</Visible>
    <PropertyGroup>ID</PropertyGroup>
+   <ItemType>String</ItemType>
    <InheritsFrom>ServerSocket</InheritsFrom>
   </ViewProperty>
   <ViewProperty>
@@ -471,12 +478,14 @@
    <ObjName>Super</ObjName>
    <Visible>1</Visible>
    <PropertyGroup>ID</PropertyGroup>
+   <ItemType>String</ItemType>
    <InheritsFrom>ServerSocket</InheritsFrom>
   </ViewProperty>
   <ViewProperty>
    <ObjName>Top</ObjName>
    <Visible>1</Visible>
    <PropertyGroup>Position</PropertyGroup>
+   <ItemType>Integer</ItemType>
    <InheritsFrom>ServerSocket</InheritsFrom>
   </ViewProperty>
  </ViewBehavior>

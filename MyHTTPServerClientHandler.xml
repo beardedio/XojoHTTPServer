@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<RBProject version="2012r2.1" FormatVersion="2" MinIDEVersion="20070100">
+<RBProject version="2013r1" FormatVersion="2" MinIDEVersion="20070100">
 <block type="Module" ID="372582399">
  <ObjName>MyHTTPServerClientHandler</ObjName>
  <ObjContainerID>1566297957</ObjContainerID>
@@ -69,7 +69,7 @@
    <SourceLine>entitylength = 0</SourceLine>
    <SourceLine>entity = ""</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>LogMsg(LogType0_Debug, "HTTPServClientHandle("+str(uid)+"): Recived Request, No Lenght")</SourceLine>
+   <SourceLine>LogMsg(LogType0_Debug, "HTTPServClientHandle("+str(uid)+"): Recived Request, No Length")</SourceLine>
    <SourceLine>End</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>// Rather than duplicate code, we handle the rest outside of the entity loop. We need</SourceLine>
@@ -161,7 +161,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>0</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams></ItemParams>
   <ItemResult></ItemResult>
  </Method>
@@ -179,7 +179,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>0</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams></ItemParams>
   <ItemResult></ItemResult>
  </Method>
@@ -196,7 +196,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>0</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams></ItemParams>
   <ItemResult>Integer</ItemResult>
  </Method>
@@ -212,7 +212,7 @@
   <TextEncoding>134217984</TextEncoding>
   <ItemDeclaration>Buffer As String</ItemDeclaration>
   <ItemFlags>33</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
  </Property>
  <Property>
   <ItemName>Lastuid</ItemName>
@@ -226,7 +226,7 @@
   <TextEncoding>134217984</TextEncoding>
   <ItemDeclaration>Lastuid As Int64 = 0</ItemDeclaration>
   <ItemFlags>33</ItemFlags>
-  <Shared>1</Shared>
+  <IsShared>1</IsShared>
  </Property>
  <Property>
   <ItemName>Parent</ItemName>
@@ -240,7 +240,7 @@
   <TextEncoding>134217984</TextEncoding>
   <ItemDeclaration>Parent As MyHTTPServerSocket</ItemDeclaration>
   <ItemFlags>0</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
  </Property>
  <Property>
   <ItemName>Searcher</ItemName>
@@ -254,7 +254,7 @@
   <TextEncoding>134217984</TextEncoding>
   <ItemDeclaration>Searcher As Regex</ItemDeclaration>
   <ItemFlags>33</ItemFlags>
-  <Shared>1</Shared>
+  <IsShared>1</IsShared>
  </Property>
  <Property>
   <ItemName>uid</ItemName>
@@ -268,7 +268,7 @@
   <TextEncoding>134217984</TextEncoding>
   <ItemDeclaration>uid As Int64</ItemDeclaration>
   <ItemFlags>33</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
  </Property>
  <Property>
   <ItemName>Context</ItemName>
@@ -282,7 +282,7 @@
   <TextEncoding>134217984</TextEncoding>
   <ItemDeclaration>Context As MyHTTPServerRequestContext</ItemDeclaration>
   <ItemFlags>0</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
  </Property>
  <ViewBehavior>
   <ViewProperty>
@@ -296,18 +296,21 @@
    <ObjName>Index</ObjName>
    <Visible>1</Visible>
    <PropertyGroup>ID</PropertyGroup>
+   <ItemType>Integer</ItemType>
    <InheritsFrom>TCPSocket</InheritsFrom>
   </ViewProperty>
   <ViewProperty>
    <ObjName>Left</ObjName>
    <Visible>1</Visible>
    <PropertyGroup>Position</PropertyGroup>
+   <ItemType>Integer</ItemType>
    <InheritsFrom>TCPSocket</InheritsFrom>
   </ViewProperty>
   <ViewProperty>
    <ObjName>Name</ObjName>
    <Visible>1</Visible>
    <PropertyGroup>ID</PropertyGroup>
+   <ItemType>String</ItemType>
    <InheritsFrom>TCPSocket</InheritsFrom>
   </ViewProperty>
   <ViewProperty>
@@ -322,12 +325,14 @@
    <ObjName>Super</ObjName>
    <Visible>1</Visible>
    <PropertyGroup>ID</PropertyGroup>
+   <ItemType>String</ItemType>
    <InheritsFrom>TCPSocket</InheritsFrom>
   </ViewProperty>
   <ViewProperty>
    <ObjName>Top</ObjName>
    <Visible>1</Visible>
    <PropertyGroup>Position</PropertyGroup>
+   <ItemType>Integer</ItemType>
    <InheritsFrom>TCPSocket</InheritsFrom>
   </ViewProperty>
  </ViewBehavior>
