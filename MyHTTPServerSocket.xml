@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<RBProject version="2013r1" FormatVersion="2" MinIDEVersion="20070100">
+<RBProject version="2013r2" FormatVersion="2" MinIDEVersion="20070100">
 <block type="Module" ID="1473691647">
  <ObjName>MyHTTPServerSocket</ObjName>
  <ObjContainerID>1566297957</ObjContainerID>
@@ -223,7 +223,18 @@
    <SourceLine></SourceLine>
    <SourceLine>If file &lt;&gt; "" Then</SourceLine>
    <SourceLine>Dim tmpf As FolderItem</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>try</SourceLine>
    <SourceLine>tmpf = New FolderItem(f.URLPath+MyHTTPServerModule.URLEncode(file), FolderItem.PathTypeURL)</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>Catch err As UnsupportedFormatException</SourceLine>
+   <SourceLine>context.statuscode = MyHTTPServerModule.kStatusNotFound</SourceLine>
+   <SourceLine>context.buffer = MyHTTPServerModule.HTTPErrorHTML(context.statuscode)</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>Exit Sub</SourceLine>
+   <SourceLine>End Try</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine></SourceLine>
    <SourceLine>If tmpf.Exists Then</SourceLine>
    <SourceLine>f = New FolderItem(tmpf)</SourceLine>
    <SourceLine>tmpf = Nil</SourceLine>
@@ -434,14 +445,12 @@
    <Visible>1</Visible>
    <PropertyGroup>ID</PropertyGroup>
    <ItemType>Integer</ItemType>
-   <InheritsFrom>ServerSocket</InheritsFrom>
   </ViewProperty>
   <ViewProperty>
    <ObjName>Left</ObjName>
    <Visible>1</Visible>
    <PropertyGroup>Position</PropertyGroup>
    <ItemType>Integer</ItemType>
-   <InheritsFrom>ServerSocket</InheritsFrom>
   </ViewProperty>
   <ViewProperty>
    <ObjName>MaximumSocketsConnected</ObjName>
@@ -449,7 +458,6 @@
    <PropertyGroup>Behavior</PropertyGroup>
    <PropertyValue>10</PropertyValue>
    <ItemType>Integer</ItemType>
-   <InheritsFrom>ServerSocket</InheritsFrom>
   </ViewProperty>
   <ViewProperty>
    <ObjName>MinimumSocketsAvailable</ObjName>
@@ -457,14 +465,12 @@
    <PropertyGroup>Behavior</PropertyGroup>
    <PropertyValue>2</PropertyValue>
    <ItemType>Integer</ItemType>
-   <InheritsFrom>ServerSocket</InheritsFrom>
   </ViewProperty>
   <ViewProperty>
    <ObjName>Name</ObjName>
    <Visible>1</Visible>
    <PropertyGroup>ID</PropertyGroup>
    <ItemType>String</ItemType>
-   <InheritsFrom>ServerSocket</InheritsFrom>
   </ViewProperty>
   <ViewProperty>
    <ObjName>Port</ObjName>
@@ -472,21 +478,18 @@
    <PropertyGroup>Behavior</PropertyGroup>
    <PropertyValue>0</PropertyValue>
    <ItemType>Integer</ItemType>
-   <InheritsFrom>ServerSocket</InheritsFrom>
   </ViewProperty>
   <ViewProperty>
    <ObjName>Super</ObjName>
    <Visible>1</Visible>
    <PropertyGroup>ID</PropertyGroup>
    <ItemType>String</ItemType>
-   <InheritsFrom>ServerSocket</InheritsFrom>
   </ViewProperty>
   <ViewProperty>
    <ObjName>Top</ObjName>
    <Visible>1</Visible>
    <PropertyGroup>Position</PropertyGroup>
    <ItemType>Integer</ItemType>
-   <InheritsFrom>ServerSocket</InheritsFrom>
   </ViewProperty>
  </ViewBehavior>
 </block>

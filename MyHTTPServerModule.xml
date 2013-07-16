@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<RBProject version="2012r2.1" FormatVersion="2" MinIDEVersion="20070100">
+<RBProject version="2013r2" FormatVersion="2" MinIDEVersion="20070100">
 <block type="Module" ID="1124685823">
  <ObjName>MyHTTPServerModule</ObjName>
  <ObjContainerID>1566297957</ObjContainerID>
@@ -68,7 +68,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>0</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams>Extends D As Date</ItemParams>
   <ItemResult>String</ItemResult>
  </Method>
@@ -88,7 +88,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>1</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams></ItemParams>
   <ItemResult>MyHTTPServerSession</ItemResult>
  </Method>
@@ -105,7 +105,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>1</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams></ItemParams>
   <ItemResult>String</ItemResult>
  </Method>
@@ -126,7 +126,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>0</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams>Extends f As FolderItem</ItemParams>
   <ItemResult>String</ItemResult>
  </Method>
@@ -148,7 +148,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>1</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams>SessionID As Integer</ItemParams>
   <ItemResult>MyHTTPServerSession</ItemResult>
  </Method>
@@ -217,7 +217,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>0</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams>Extends myDate As Date</ItemParams>
   <ItemResult>String</ItemResult>
  </Method>
@@ -297,7 +297,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>0</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams>serverpath As String, f As FolderItem</ItemParams>
   <ItemResult>String</ItemResult>
  </Method>
@@ -335,7 +335,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>0</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams>StatusCode As Integer</ItemParams>
   <ItemResult>String</ItemResult>
  </Method>
@@ -397,7 +397,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>0</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams>ext As String</ItemParams>
   <ItemResult>String</ItemResult>
  </Method>
@@ -2513,7 +2513,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>0</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams>ext As String</ItemParams>
   <ItemResult>String</ItemResult>
  </Method>
@@ -2673,7 +2673,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>0</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams>StatusCode As Integer</ItemParams>
   <ItemResult>String</ItemResult>
  </Method>
@@ -2706,7 +2706,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>1</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams>startPos As Integer = - 1, source As String, substr As String</ItemParams>
   <ItemResult>Integer</ItemResult>
  </Method>
@@ -2735,7 +2735,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>1</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams>source As String, charsToTrim As String</ItemParams>
   <ItemResult>String</ItemResult>
  </Method>
@@ -2762,7 +2762,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>1</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams>s as String, width as Integer, padding as String = " "</ItemParams>
   <ItemResult>String</ItemResult>
  </Method>
@@ -2789,7 +2789,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>1</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams>s as String, width as Integer, padding as String = " "</ItemParams>
   <ItemResult>String</ItemResult>
  </Method>
@@ -2833,7 +2833,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>1</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams>s as String, repeatCount as Integer</ItemParams>
   <ItemResult>String</ItemResult>
  </Method>
@@ -2866,7 +2866,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>1</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams>s As String</ItemParams>
   <ItemResult>String</ItemResult>
  </Method>
@@ -2894,7 +2894,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>1</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams>source As String, charsToTrim As String</ItemParams>
   <ItemResult>String</ItemResult>
  </Method>
@@ -2929,7 +2929,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>1</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams>source As String, charsToTrim As String</ItemParams>
   <ItemResult>String</ItemResult>
  </Method>
@@ -2990,7 +2990,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>0</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams>s as String</ItemParams>
   <ItemResult>String</ItemResult>
  </Method>
@@ -3048,7 +3048,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>0</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams>s as String</ItemParams>
   <ItemResult>String</ItemResult>
  </Method>
@@ -3070,7 +3070,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>1</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams>Num As Integer, Length As Integer = 2</ItemParams>
   <ItemResult>String</ItemResult>
  </Method>
@@ -3263,7 +3263,7 @@
   <TextEncoding>134217984</TextEncoding>
   <ItemDeclaration>Sessions() As MyHTTPServerSession</ItemDeclaration>
   <ItemFlags>1</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
  </Property>
  <ViewBehavior>
   <ViewProperty>
@@ -3271,6 +3271,7 @@
    <Visible>1</Visible>
    <PropertyGroup>ID</PropertyGroup>
    <PropertyValue>-2147483648</PropertyValue>
+   <ItemType>Integer</ItemType>
    <InheritsFrom>Object</InheritsFrom>
   </ViewProperty>
   <ViewProperty>
@@ -3278,18 +3279,21 @@
    <Visible>1</Visible>
    <PropertyGroup>Position</PropertyGroup>
    <PropertyValue>0</PropertyValue>
+   <ItemType>Integer</ItemType>
    <InheritsFrom>Object</InheritsFrom>
   </ViewProperty>
   <ViewProperty>
    <ObjName>Name</ObjName>
    <Visible>1</Visible>
    <PropertyGroup>ID</PropertyGroup>
+   <ItemType>String</ItemType>
    <InheritsFrom>Object</InheritsFrom>
   </ViewProperty>
   <ViewProperty>
    <ObjName>Super</ObjName>
    <Visible>1</Visible>
    <PropertyGroup>ID</PropertyGroup>
+   <ItemType>String</ItemType>
    <InheritsFrom>Object</InheritsFrom>
   </ViewProperty>
   <ViewProperty>
@@ -3297,6 +3301,7 @@
    <Visible>1</Visible>
    <PropertyGroup>Position</PropertyGroup>
    <PropertyValue>0</PropertyValue>
+   <ItemType>Integer</ItemType>
    <InheritsFrom>Object</InheritsFrom>
   </ViewProperty>
  </ViewBehavior>
