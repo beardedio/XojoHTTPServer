@@ -1,6 +1,8 @@
 Xojo-HTTPServer
 ===============
 
+If you like my work and want to support it you can do so here
+https://www.gittip.com/bskrtich/
 
 A http server class for Xojo / RealBasic licensed under the MIT License.
 
