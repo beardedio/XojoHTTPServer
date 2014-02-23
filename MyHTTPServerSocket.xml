@@ -1,5 +1,5 @@
-<?xml version="1.0"?>
-<RBProject version="2012r2.1" FormatVersion="2" MinIDEVersion="20070100">
+<?xml version="1.0" encoding="UTF-8"?>
+<RBProject version="2013r4" FormatVersion="2" MinIDEVersion="20070100">
 <block type="Module" ID="1473691647">
  <ObjName>MyHTTPServerSocket</ObjName>
  <ObjContainerID>1566297957</ObjContainerID>
@@ -47,7 +47,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>0</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams>URL As String, File As FolderItem</ItemParams>
   <ItemResult></ItemResult>
  </Method>
@@ -64,7 +64,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>0</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams>URL As String, Handler As MyHTTPServerRequestHandler</ItemParams>
   <ItemResult></ItemResult>
  </Method>
@@ -109,7 +109,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>0</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams></ItemParams>
   <ItemResult></ItemResult>
  </Method>
@@ -136,7 +136,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>0</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams></ItemParams>
   <ItemResult></ItemResult>
  </Method>
@@ -154,7 +154,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>0</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams>Port As Integer</ItemParams>
   <ItemResult></ItemResult>
  </Method>
@@ -172,7 +172,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>1</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams></ItemParams>
   <ItemResult></ItemResult>
  </Method>
@@ -280,6 +280,8 @@
    <SourceLine></SourceLine>
    <SourceLine>Dim ReadStream As BinaryStream = BinaryStream.Open(f, False)</SourceLine>
    <SourceLine>If ReadStream.Length &gt; 0 Then</SourceLine>
+   <SourceLine>Context.Headers.Value(MyHTTPServerModule.kHeaderDate) = f.ModificationDate.HTTPDate</SourceLine>
+   <SourceLine></SourceLine>
    <SourceLine>Context.Buffer = ReadStream.Read(ReadStream.Length)</SourceLine>
    <SourceLine>ReadStream.Close</SourceLine>
    <SourceLine>ReadStream = Nil</SourceLine>
@@ -321,7 +323,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>0</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams>URL As String, Context As MyHTTPServerRequestContext</ItemParams>
   <ItemResult></ItemResult>
  </Method>
@@ -339,7 +341,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>0</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams></ItemParams>
   <ItemResult></ItemResult>
  </Method>
@@ -358,7 +360,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>0</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams>URL As String</ItemParams>
   <ItemResult></ItemResult>
  </Method>
@@ -375,7 +377,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>0</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams></ItemParams>
   <ItemResult>Integer</ItemResult>
  </Method>
@@ -393,7 +395,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>0</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams></ItemParams>
   <ItemResult></ItemResult>
  </Method>
@@ -409,7 +411,7 @@
   <TextEncoding>134217984</TextEncoding>
   <ItemDeclaration>ClientTimeOut As Integer = 10</ItemDeclaration>
   <ItemFlags>0</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
  </Property>
  <Property>
   <ItemName>IndexFiles()</ItemName>
@@ -423,7 +425,7 @@
   <TextEncoding>134217984</TextEncoding>
   <ItemDeclaration>IndexFiles() As String</ItemDeclaration>
   <ItemFlags>0</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
  </Property>
  <Property>
   <ItemName>URLs</ItemName>
@@ -437,7 +439,7 @@
   <TextEncoding>134217984</TextEncoding>
   <ItemDeclaration>URLs As Dictionary</ItemDeclaration>
   <ItemFlags>33</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
  </Property>
  <Property>
   <ItemName>SocketTimer</ItemName>
@@ -451,40 +453,38 @@
   <TextEncoding>134217984</TextEncoding>
   <ItemDeclaration>SocketTimer As MyHTTPServerTimer</ItemDeclaration>
   <ItemFlags>33</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
  </Property>
  <ViewBehavior>
   <ViewProperty>
    <ObjName>Name</ObjName>
    <Visible>1</Visible>
    <PropertyGroup>ID</PropertyGroup>
-   <InheritsFrom>ServerSocket</InheritsFrom>
+   <ItemType>String</ItemType>
   </ViewProperty>
   <ViewProperty>
    <ObjName>Index</ObjName>
    <Visible>1</Visible>
    <PropertyGroup>ID</PropertyGroup>
-   <InheritsFrom>ServerSocket</InheritsFrom>
+   <ItemType>Integer</ItemType>
   </ViewProperty>
   <ViewProperty>
    <ObjName>Super</ObjName>
    <Visible>1</Visible>
    <PropertyGroup>ID</PropertyGroup>
-   <InheritsFrom>ServerSocket</InheritsFrom>
+   <ItemType>String</ItemType>
   </ViewProperty>
   <ViewProperty>
    <ObjName>Left</ObjName>
    <Visible>1</Visible>
    <PropertyGroup>Position</PropertyGroup>
    <ItemType>Integer</ItemType>
-   <InheritsFrom>ServerSocket</InheritsFrom>
   </ViewProperty>
   <ViewProperty>
    <ObjName>Top</ObjName>
    <Visible>1</Visible>
    <PropertyGroup>Position</PropertyGroup>
    <ItemType>Integer</ItemType>
-   <InheritsFrom>ServerSocket</InheritsFrom>
   </ViewProperty>
   <ViewProperty>
    <ObjName>Port</ObjName>
@@ -492,7 +492,6 @@
    <PropertyGroup>Behavior</PropertyGroup>
    <PropertyValue>0</PropertyValue>
    <ItemType>Integer</ItemType>
-   <InheritsFrom>ServerSocket</InheritsFrom>
   </ViewProperty>
   <ViewProperty>
    <ObjName>MinimumSocketsAvailable</ObjName>
@@ -500,7 +499,6 @@
    <PropertyGroup>Behavior</PropertyGroup>
    <PropertyValue>2</PropertyValue>
    <ItemType>Integer</ItemType>
-   <InheritsFrom>ServerSocket</InheritsFrom>
   </ViewProperty>
   <ViewProperty>
    <ObjName>MaximumSocketsConnected</ObjName>
@@ -508,7 +506,6 @@
    <PropertyGroup>Behavior</PropertyGroup>
    <PropertyValue>10</PropertyValue>
    <ItemType>Integer</ItemType>
-   <InheritsFrom>ServerSocket</InheritsFrom>
   </ViewProperty>
   <ViewProperty>
    <ObjName>ClientTimeOut</ObjName>

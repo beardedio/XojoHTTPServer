@@ -1,5 +1,5 @@
-<?xml version="1.0"?>
-<RBProject version="2013r1" FormatVersion="2" MinIDEVersion="20070100">
+<?xml version="1.0" encoding="UTF-8"?>
+<RBProject version="2013r4.1" FormatVersion="2" MinIDEVersion="20070100">
 <block type="Module" ID="372582399">
  <ObjName>MyHTTPServerClientHandler</ObjName>
  <ObjContainerID>1566297957</ObjContainerID>
@@ -28,7 +28,7 @@
    <SourceLine></SourceLine>
    <SourceLine>headerslength = InStrB(la, MyHTTPServerModule.crlf + MyHTTPServerModule.crlf) - 1 // length of the headers</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>LogMsg(LogType1_Notice, "HTTPServClientHandle("+str(uid)+"): Data Available ["+str(LenB(la))+" totallen] "+str(headerslength)+" headerlen")</SourceLine>
+   <SourceLine>LogMsg(LogType1_Notice, "HTTPServClientHandle("+Str(uid)+"): Data Available ["+Str(LenB(la))+" totallen] "+Str(headerslength)+" headerlen")</SourceLine>
    <SourceLine>If headerslength &gt; 0 Then</SourceLine>
    <SourceLine>// We have a complete header. But we're not done yet. Some HTTP methods send entity</SourceLine>
    <SourceLine>// data, such as POST and PUT, which need to be read out as well, but may not be complete</SourceLine>
@@ -39,6 +39,13 @@
    <SourceLine>headers = LeftB(la, headerslength) // the headers</SourceLine>
    <SourceLine>context = New MyHTTPServerRequestContext</SourceLine>
    <SourceLine>context.loadrequestparameters(headers)</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>// Check for required headers</SourceLine>
+   <SourceLine>'If MyHTTPServerModule.kVersion = "HTTP/1.1" Then</SourceLine>
+   <SourceLine>'If context.Headers.HasKey("Host") = False Then</SourceLine>
+   <SourceLine>'MsgBox("Error")</SourceLine>
+   <SourceLine>'End If</SourceLine>
+   <SourceLine>'End If</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>If context.header(MyHTTPServerModule.kheadercontentlength) &lt;&gt; "" Then</SourceLine>
    <SourceLine>// Now we know there is entity data in this request.</SourceLine>
@@ -54,12 +61,12 @@
    <SourceLine>data = Me.read(requestlength, encodings.ascii)</SourceLine>
    <SourceLine>entity = MidB(data,headerslength + 1 + LenB(MyHTTPServerModule.crlf + MyHTTPServerModule.crlf),entitylength)</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>LogMsg(LogType0_Debug, "HTTPServClientHandle("+str(uid)+"): Recived Request, "+str(requestlength)+" len")</SourceLine>
+   <SourceLine>LogMsg(LogType0_Debug, "HTTPServClientHandle("+Str(uid)+"): Recived Request, "+Str(requestlength)+" len")</SourceLine>
    <SourceLine>Else</SourceLine>
    <SourceLine>// There is more data to be received. We take no further action in this event, and start</SourceLine>
    <SourceLine>// over the next event, which should contain more data.</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>LogMsg(LogType0_Debug, "HTTPServClientHandle("+str(uid)+"): Missing Data Resetting goto START")</SourceLine>
+   <SourceLine>LogMsg(LogType0_Debug, "HTTPServClientHandle("+Str(uid)+"): Missing Data Resetting goto START")</SourceLine>
    <SourceLine>End</SourceLine>
    <SourceLine>Else</SourceLine>
    <SourceLine>// The request does not contain a Content-Length header, so it must be complete.</SourceLine>
@@ -69,7 +76,7 @@
    <SourceLine>entitylength = 0</SourceLine>
    <SourceLine>entity = ""</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>LogMsg(LogType0_Debug, "HTTPServClientHandle("+str(uid)+"): Recived Request, No Length")</SourceLine>
+   <SourceLine>LogMsg(LogType0_Debug, "HTTPServClientHandle("+Str(uid)+"): Recived Request, No Length")</SourceLine>
    <SourceLine>End</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>// Rather than duplicate code, we handle the rest outside of the entity loop. We need</SourceLine>
@@ -86,7 +93,7 @@
    <SourceLine>searcher.searchpattern = MyHTTPServerModule.kregexrequestline</SourceLine>
    <SourceLine>m = searcher.search(headers)</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>if m &lt;&gt; Nil Then</SourceLine>
+   <SourceLine>If m &lt;&gt; Nil Then</SourceLine>
    <SourceLine>method = m.subexpressionstring(1)</SourceLine>
    <SourceLine>url = m.subexpressionstring(2)</SourceLine>
    <SourceLine>query = m.subexpressionstring(4)</SourceLine>
@@ -106,17 +113,19 @@
    <SourceLine>context.entity = entity</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>// We ask the server to send our context to whatever is handling this url</SourceLine>
-   <SourceLine>LogMsg(LogType1_Notice, "HTTPServClientHandle("+str(uid)+"): Processing URL "+URLDecode(url))</SourceLine>
+   <SourceLine>LogMsg(LogType1_Notice, "HTTPServClientHandle("+Str(uid)+"): Processing URL "+URLDecode(url))</SourceLine>
    <SourceLine>parent.forwardcontext(URLDecode(url), context)</SourceLine>
    <SourceLine>Else</SourceLine>
    <SourceLine>context.statuscode = MyHTTPServerModule.kStatusBadRequest</SourceLine>
    <SourceLine>Context.Buffer = MyHTTPServerModule.HTTPErrorHTML(context.statuscode)</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>End if</SourceLine>
+   <SourceLine>End If</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>// HTTP requests rely on the Content-Length header. Rather than require the user to set</SourceLine>
    <SourceLine>// the header, we simply add it based on the buffer size.</SourceLine>
    <SourceLine>context.headers.value(MyHTTPServerModule.kheadercontentlength) = LenB(context.buffer)</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>context.headers.value(MyHTTPServerModule.kHeaderConnection) = "close"</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>context.headers.value(MyHTTPServerModule.kHeaderServer) = MyHTTPServerModule.VersionLongString</SourceLine>
    <SourceLine></SourceLine>
@@ -129,18 +138,23 @@
    <SourceLine>Next</SourceLine>
    <SourceLine>Me.write(MyHTTPServerModule.crlf)</SourceLine>
    <SourceLine>Me.write(context.buffer)</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>me.Flush</SourceLine>
+   <SourceLine>Me.Disconnect</SourceLine>
    <SourceLine>Else</SourceLine>
    <SourceLine>// Incomplete request</SourceLine>
    <SourceLine>End</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine></SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>// Now we send the loop back to the beginning so we can handle the possibility of 2+</SourceLine>
    <SourceLine>// requests in a single event.</SourceLine>
    <SourceLine>data = ""</SourceLine>
    <SourceLine>la = Me.lookahead(encodings.ascii)</SourceLine>
-   <SourceLine>if LenB(la) &gt; 0 Then</SourceLine>
-   <SourceLine>LogMsg(LogType0_Debug, "HTTPServClientHandle("+str(uid)+"): More DataAvaible - Start Over "+str(LenB(la)))</SourceLine>
+   <SourceLine>If LenB(la) &gt; 0 Then</SourceLine>
+   <SourceLine>LogMsg(LogType0_Debug, "HTTPServClientHandle("+Str(uid)+"): More DataAvaible - Start Over "+Str(LenB(la)))</SourceLine>
    <SourceLine>GoTo restartPoint</SourceLine>
-   <SourceLine>End if</SourceLine>
+   <SourceLine>End If</SourceLine>
    <SourceLine>End</SourceLine>
    <SourceLine>End Sub</SourceLine>
   </ItemSource>
@@ -152,6 +166,13 @@
   <ItemSource>
    <TextEncoding>134217984</TextEncoding>
    <SourceLine>Sub Constructor()</SourceLine>
+   <SourceLine>// Calling the overridden superclass constructor.</SourceLine>
+   <SourceLine>// Note that this may need modifications if there are multiple constructor choices.</SourceLine>
+   <SourceLine>// Possible constructor calls:</SourceLine>
+   <SourceLine>// Constructor() -- From TCPSocket</SourceLine>
+   <SourceLine>// Constructor() -- From SocketCore</SourceLine>
+   <SourceLine>Super.Constructor</SourceLine>
+   <SourceLine></SourceLine>
    <SourceLine>uid = Lastuid + 1</SourceLine>
    <SourceLine>Lastuid = uid</SourceLine>
    <SourceLine></SourceLine>
@@ -267,7 +288,7 @@
   </ItemSource>
   <TextEncoding>134217984</TextEncoding>
   <ItemDeclaration>uid As Int64</ItemDeclaration>
-  <ItemFlags>33</ItemFlags>
+  <ItemFlags>0</ItemFlags>
   <IsShared>0</IsShared>
  </Property>
  <Property>
@@ -290,28 +311,24 @@
    <Visible>1</Visible>
    <PropertyGroup>Behavior</PropertyGroup>
    <ItemType>String</ItemType>
-   <InheritsFrom>TCPSocket</InheritsFrom>
   </ViewProperty>
   <ViewProperty>
    <ObjName>Index</ObjName>
    <Visible>1</Visible>
    <PropertyGroup>ID</PropertyGroup>
    <ItemType>Integer</ItemType>
-   <InheritsFrom>TCPSocket</InheritsFrom>
   </ViewProperty>
   <ViewProperty>
    <ObjName>Left</ObjName>
    <Visible>1</Visible>
    <PropertyGroup>Position</PropertyGroup>
    <ItemType>Integer</ItemType>
-   <InheritsFrom>TCPSocket</InheritsFrom>
   </ViewProperty>
   <ViewProperty>
    <ObjName>Name</ObjName>
    <Visible>1</Visible>
    <PropertyGroup>ID</PropertyGroup>
    <ItemType>String</ItemType>
-   <InheritsFrom>TCPSocket</InheritsFrom>
   </ViewProperty>
   <ViewProperty>
    <ObjName>Port</ObjName>
@@ -319,21 +336,18 @@
    <PropertyGroup>Behavior</PropertyGroup>
    <PropertyValue>0</PropertyValue>
    <ItemType>Integer</ItemType>
-   <InheritsFrom>TCPSocket</InheritsFrom>
   </ViewProperty>
   <ViewProperty>
    <ObjName>Super</ObjName>
    <Visible>1</Visible>
    <PropertyGroup>ID</PropertyGroup>
    <ItemType>String</ItemType>
-   <InheritsFrom>TCPSocket</InheritsFrom>
   </ViewProperty>
   <ViewProperty>
    <ObjName>Top</ObjName>
    <Visible>1</Visible>
    <PropertyGroup>Position</PropertyGroup>
    <ItemType>Integer</ItemType>
-   <InheritsFrom>TCPSocket</InheritsFrom>
   </ViewProperty>
  </ViewBehavior>
 </block>

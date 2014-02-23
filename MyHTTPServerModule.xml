@@ -1,5 +1,5 @@
-<?xml version="1.0"?>
-<RBProject version="2013r2" FormatVersion="2" MinIDEVersion="20070100">
+<?xml version="1.0" encoding="UTF-8"?>
+<RBProject version="2013r4" FormatVersion="2" MinIDEVersion="20070100">
 <block type="Module" ID="1124685823">
  <ObjName>MyHTTPServerModule</ObjName>
  <ObjContainerID>1566297957</ObjContainerID>
@@ -3272,7 +3272,6 @@
    <PropertyGroup>ID</PropertyGroup>
    <PropertyValue>-2147483648</PropertyValue>
    <ItemType>Integer</ItemType>
-   <InheritsFrom>Object</InheritsFrom>
   </ViewProperty>
   <ViewProperty>
    <ObjName>Left</ObjName>
@@ -3280,21 +3279,18 @@
    <PropertyGroup>Position</PropertyGroup>
    <PropertyValue>0</PropertyValue>
    <ItemType>Integer</ItemType>
-   <InheritsFrom>Object</InheritsFrom>
   </ViewProperty>
   <ViewProperty>
    <ObjName>Name</ObjName>
    <Visible>1</Visible>
    <PropertyGroup>ID</PropertyGroup>
    <ItemType>String</ItemType>
-   <InheritsFrom>Object</InheritsFrom>
   </ViewProperty>
   <ViewProperty>
    <ObjName>Super</ObjName>
    <Visible>1</Visible>
    <PropertyGroup>ID</PropertyGroup>
    <ItemType>String</ItemType>
-   <InheritsFrom>Object</InheritsFrom>
   </ViewProperty>
   <ViewProperty>
    <ObjName>Top</ObjName>
@@ -3302,7 +3298,6 @@
    <PropertyGroup>Position</PropertyGroup>
    <PropertyValue>0</PropertyValue>
    <ItemType>Integer</ItemType>
-   <InheritsFrom>Object</InheritsFrom>
   </ViewProperty>
  </ViewBehavior>
  <Constant>
@@ -4472,7 +4467,7 @@
   <TextEncoding>134217984</TextEncoding>
   <ItemName>kVersion</ItemName>
   <ItemType>0</ItemType>
-  <ItemDef>HTTP/1.0</ItemDef>
+  <ItemDef>HTTP/1.1</ItemDef>
   <ItemFlags>1</ItemFlags>
  </Constant>
  <Constant>
@@ -4482,7 +4477,7 @@
   <TextEncoding>134217984</TextEncoding>
   <ItemName>VersionLongString</ItemName>
   <ItemType>0</ItemType>
-  <ItemDef>REALbasic HTTP Server 0.2</ItemDef>
+  <ItemDef>REALbasic HTTP Server 0.3</ItemDef>
   <ItemFlags>1</ItemFlags>
  </Constant>
  <Constant>
