@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<RBProject version="2013r4" FormatVersion="2" MinIDEVersion="20070100">
+<RBProject version="2014r1" FormatVersion="2" MinIDEVersion="20070100">
 <block type="Module" ID="1473691647">
  <ObjName>MyHTTPServerSocket</ObjName>
  <ObjContainerID>1566297957</ObjContainerID>
@@ -121,12 +121,6 @@
    <TextEncoding>134217984</TextEncoding>
    <SourceLine>Sub Constructor()</SourceLine>
    <SourceLine>LogMsg(LogType0_Debug, "HTTPServSock: Constuct")</SourceLine>
-   <SourceLine></SourceLine>
-   <SourceLine>// Timer to poll the socket for small bits of data</SourceLine>
-   <SourceLine>SocketTimer = New MyHTTPServerTimer</SourceLine>
-   <SourceLine>SocketTimer.Mode = Timer.ModeMultiple</SourceLine>
-   <SourceLine>SocketTimer.Period = 500</SourceLine>
-   <SourceLine>SocketTimer.ServerSocket = Me</SourceLine>
    <SourceLine></SourceLine>
    <SourceLine>Me.port = MyHTTPServerModule.kDefaultPort</SourceLine>
    <SourceLine>Me.urls = New dictionary</SourceLine>
@@ -438,20 +432,6 @@
   </ItemSource>
   <TextEncoding>134217984</TextEncoding>
   <ItemDeclaration>URLs As Dictionary</ItemDeclaration>
-  <ItemFlags>33</ItemFlags>
-  <IsShared>0</IsShared>
- </Property>
- <Property>
-  <ItemName>SocketTimer</ItemName>
-  <Compatibility></Compatibility>
-  <Visible>1</Visible>
-  <ItemSource>
-   <TextEncoding>134217984</TextEncoding>
-   <SourceLine>SocketTimer As MyHTTPServerTimer</SourceLine>
-   <SourceLine></SourceLine>
-  </ItemSource>
-  <TextEncoding>134217984</TextEncoding>
-  <ItemDeclaration>SocketTimer As MyHTTPServerTimer</ItemDeclaration>
   <ItemFlags>33</ItemFlags>
   <IsShared>0</IsShared>
  </Property>

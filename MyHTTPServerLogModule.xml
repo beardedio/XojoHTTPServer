@@ -1,5 +1,5 @@
-<?xml version="1.0"?>
-<RBProject version="2012r2.1" FormatVersion="2" MinIDEVersion="20070100">
+<?xml version="1.0" encoding="UTF-8"?>
+<RBProject version="2014r1" FormatVersion="2" MinIDEVersion="20070100">
 <block type="Module" ID="490416607">
  <ObjName>MyHTTPServerLogModule</ObjName>
  <ObjContainerID>0</ObjContainerID>
@@ -35,9 +35,11 @@
    <SourceLine>if LastLogCount &gt; 1 Then</SourceLine>
    <SourceLine>i = len(DebugLogPrefix+"Last Message Repeated "+str(LastLogCount-1)+" Times"+EndOfLine)+32+((LastLogCount-1) MOD 2)</SourceLine>
    <SourceLine></SourceLine>
+   <SourceLine>If DebugLogFile &lt;&gt; Nil Then</SourceLine>
    <SourceLine>DebugLogFile.Length = DebugLogFile.Length - i</SourceLine>
    <SourceLine>DebugLogFile.Position = DebugLogFile.Length</SourceLine>
    <SourceLine>DebugLogFile.Flush</SourceLine>
+   <SourceLine>End If</SourceLine>
    <SourceLine>End if</SourceLine>
    <SourceLine>End if</SourceLine>
    <SourceLine>#endif</SourceLine>
@@ -82,7 +84,7 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>0</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams>Type As Integer, s As String</ItemParams>
   <ItemResult></ItemResult>
  </Method>
@@ -101,8 +103,57 @@
   <TextEncoding>134217984</TextEncoding>
   <AliasName></AliasName>
   <ItemFlags>0</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
   <ItemParams>Type As Integer, s As String, err As RuntimeException</ItemParams>
+  <ItemResult></ItemResult>
+ </Method>
+ <Method>
+  <ItemName>InitDebugLog</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>Sub InitDebugLog()</SourceLine>
+   <SourceLine>Dim tmpfolder As FolderItem</SourceLine>
+   <SourceLine>Dim logfile As FolderItem</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>tmpfolder = SpecialFolder.ApplicationData.Child(PropCompanyName)</SourceLine>
+   <SourceLine>If Not tmpfolder.Exists Then</SourceLine>
+   <SourceLine>tmpfolder.CreateAsFolder</SourceLine>
+   <SourceLine>tmpfolder.Permissions = &amp;o777</SourceLine>
+   <SourceLine>End If</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>DataFolder = tmpfolder.Child(PropName)</SourceLine>
+   <SourceLine>If Not DataFolder.Exists Then</SourceLine>
+   <SourceLine>If tmpfolder.IsWriteable Then</SourceLine>
+   <SourceLine>DataFolder.CreateAsFolder</SourceLine>
+   <SourceLine>DataFolder.Permissions = &amp;o777</SourceLine>
+   <SourceLine>Else</SourceLine>
+   <SourceLine>MsgBox("Unable to create Data folder. Closing App.")</SourceLine>
+   <SourceLine>Quit</SourceLine>
+   <SourceLine>End If</SourceLine>
+   <SourceLine>End If</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>logfile = DataFolder.Child("debug.log")</SourceLine>
+   <SourceLine></SourceLine>
+   <SourceLine>// Setup Logfile if needed</SourceLine>
+   <SourceLine>If App.StageCode &lt; 3 Or DebugBuild Then</SourceLine>
+   <SourceLine>Try</SourceLine>
+   <SourceLine>If logfile &lt;&gt; Nil And logfile.Exists Then</SourceLine>
+   <SourceLine>DebugLogFile = BinaryStream.Open(logfile, True)</SourceLine>
+   <SourceLine>Else</SourceLine>
+   <SourceLine>DebugLogFile = BinaryStream.Create(logfile, True)</SourceLine>
+   <SourceLine>End If</SourceLine>
+   <SourceLine>DebugLogFile.Position = DebugLogFile.Length</SourceLine>
+   <SourceLine>End Try</SourceLine>
+   <SourceLine>End If</SourceLine>
+   <SourceLine>End Sub</SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <AliasName></AliasName>
+  <ItemFlags>0</ItemFlags>
+  <IsShared>0</IsShared>
+  <ItemParams></ItemParams>
   <ItemResult></ItemResult>
  </Method>
  <Property>
@@ -117,7 +168,7 @@
   <TextEncoding>134217984</TextEncoding>
   <ItemDeclaration>DebugLogFile As BinaryStream</ItemDeclaration>
   <ItemFlags>0</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
  </Property>
  <Property>
   <ItemName>LastLogCount</ItemName>
@@ -131,7 +182,7 @@
   <TextEncoding>134217984</TextEncoding>
   <ItemDeclaration>LastLogCount As UInt64 = 0</ItemDeclaration>
   <ItemFlags>33</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
  </Property>
  <Property>
   <ItemName>LastLogString</ItemName>
@@ -145,41 +196,83 @@
   <TextEncoding>134217984</TextEncoding>
   <ItemDeclaration>LastLogString As String</ItemDeclaration>
   <ItemFlags>33</ItemFlags>
-  <Shared>0</Shared>
+  <IsShared>0</IsShared>
+ </Property>
+ <Property>
+  <ItemName>PropName</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>PropName As String = "Demo"</SourceLine>
+   <SourceLine></SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <ItemDeclaration>PropName As String = "Demo"</ItemDeclaration>
+  <ItemFlags>0</ItemFlags>
+  <IsShared>0</IsShared>
+ </Property>
+ <Property>
+  <ItemName>PropCompanyName</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>PropCompanyName As String = "HTTPServer"</SourceLine>
+   <SourceLine></SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <ItemDeclaration>PropCompanyName As String = "HTTPServer"</ItemDeclaration>
+  <ItemFlags>0</ItemFlags>
+  <IsShared>0</IsShared>
+ </Property>
+ <Property>
+  <ItemName>DataFolder</ItemName>
+  <Compatibility></Compatibility>
+  <Visible>1</Visible>
+  <ItemSource>
+   <TextEncoding>134217984</TextEncoding>
+   <SourceLine>DataFolder As FolderItem</SourceLine>
+   <SourceLine></SourceLine>
+  </ItemSource>
+  <TextEncoding>134217984</TextEncoding>
+  <ItemDeclaration>DataFolder As FolderItem</ItemDeclaration>
+  <ItemFlags>0</ItemFlags>
+  <IsShared>0</IsShared>
  </Property>
  <ViewBehavior>
   <ViewProperty>
    <ObjName>Name</ObjName>
    <Visible>1</Visible>
    <PropertyGroup>ID</PropertyGroup>
-   <InheritsFrom>Object</InheritsFrom>
+   <ItemType>String</ItemType>
   </ViewProperty>
   <ViewProperty>
    <ObjName>Index</ObjName>
    <Visible>1</Visible>
    <PropertyGroup>ID</PropertyGroup>
    <PropertyValue>-2147483648</PropertyValue>
-   <InheritsFrom>Object</InheritsFrom>
+   <ItemType>Integer</ItemType>
   </ViewProperty>
   <ViewProperty>
    <ObjName>Super</ObjName>
    <Visible>1</Visible>
    <PropertyGroup>ID</PropertyGroup>
-   <InheritsFrom>Object</InheritsFrom>
+   <ItemType>String</ItemType>
   </ViewProperty>
   <ViewProperty>
    <ObjName>Left</ObjName>
    <Visible>1</Visible>
    <PropertyGroup>Position</PropertyGroup>
    <PropertyValue>0</PropertyValue>
-   <InheritsFrom>Object</InheritsFrom>
+   <ItemType>Integer</ItemType>
   </ViewProperty>
   <ViewProperty>
    <ObjName>Top</ObjName>
    <Visible>1</Visible>
    <PropertyGroup>Position</PropertyGroup>
    <PropertyValue>0</PropertyValue>
-   <InheritsFrom>Object</InheritsFrom>
+   <ItemType>Integer</ItemType>
   </ViewProperty>
  </ViewBehavior>
  <Constant>
