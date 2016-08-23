@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<RBProject version="2013r4.1" FormatVersion="2" MinIDEVersion="20070100">
+<RBProject version="2014r1.1" FormatVersion="2" MinIDEVersion="20070100">
 <block type="Module" ID="372582399">
  <ObjName>MyHTTPServerClientHandler</ObjName>
  <ObjContainerID>1566297957</ObjContainerID>
@@ -139,8 +139,6 @@
    <SourceLine>Me.write(MyHTTPServerModule.crlf)</SourceLine>
    <SourceLine>Me.write(context.buffer)</SourceLine>
    <SourceLine></SourceLine>
-   <SourceLine>me.Flush</SourceLine>
-   <SourceLine>Me.Disconnect</SourceLine>
    <SourceLine>Else</SourceLine>
    <SourceLine>// Incomplete request</SourceLine>
    <SourceLine>End</SourceLine>
@@ -154,6 +152,9 @@
    <SourceLine>If LenB(la) &gt; 0 Then</SourceLine>
    <SourceLine>LogMsg(LogType0_Debug, "HTTPServClientHandle("+Str(uid)+"): More DataAvaible - Start Over "+Str(LenB(la)))</SourceLine>
    <SourceLine>GoTo restartPoint</SourceLine>
+   <SourceLine>Else</SourceLine>
+   <SourceLine>Me.Flush</SourceLine>
+   <SourceLine>Me.Disconnect</SourceLine>
    <SourceLine>End If</SourceLine>
    <SourceLine>End</SourceLine>
    <SourceLine>End Sub</SourceLine>
