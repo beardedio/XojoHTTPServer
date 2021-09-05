@@ -1,0 +1,53 @@
+# OS Generated Files
+*~
+._*
+.DS_Store
+.DS_Store?
+.Spotlight-V100
+.Trashes
+Desktop.ini
+ehthumbs.db
+Icon?
+Thumbs.db
+
+# Editor Files
+.fuse_hidden*
+.idea
+.vagrant
+.vscode
+.kdev4/
+*.kdev4
+*.bak
+*.codekit
+*.iml
+*.sublime*
+*.swp
+*.vi
+
+# Packages
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Random temp files
+*.diff
+*.err
+*.log
+*.orig
+*.patch
+*.rej
+*.swo
+
+# Xojo Generated Files
+*.app
+*.rbuistate
+*.xojo_uistate
+*Builds - *
+*.DS_Store
+*.obsolete
+Debug*.tar.gz
